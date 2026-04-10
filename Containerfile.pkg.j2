@@ -3,7 +3,6 @@ FROM ghcr.io/daemonless/base:${BASE_VERSION}
 
 ARG FREEBSD_ARCH=amd64
 ARG PACKAGES="authelia"
-ARG APP_VERSION="latest"
 
 LABEL org.opencontainers.image.title="Authelia" \
       org.opencontainers.image.description="Authelia on FreeBSD." \
@@ -24,14 +23,8 @@ LABEL org.opencontainers.image.title="Authelia" \
 RUN pkg update && \
     pkg install -y ${PACKAGES} && \
     pkg clean -ay && \
+    mkdir -p /app && pkg info authelia | sed -n 's/.*Version.*: *//p' > /app/version && \
     rm -rf /var/cache/pkg/* /var/db/pkg/repos/*
-
-# Download and install authelia
-#RUN fetch -qo /tmp/authelia.tar.gz "${DOWNLOAD_URL}" && 
-#    mkdir -p /usr/local/share/authelia && 
-#    tar -xzf /tmp/authelia.tar.gz -C /usr/local/share/authelia --strip-components=1 && 
-#    rm /tmp/authelia.tar.gz && 
-#    echo "${APP_VERSION}" > /app/version
 
 # Copy root filesystem
 COPY root/ /
@@ -39,8 +32,12 @@ COPY root/ /
 # Set permissions
 RUN chmod +x /etc/services.d/authelia/run /healthz
 
-# Expose
-EXPOSE 9091
+# --- Expose (Injected by Generator) ---
+{%- if ports %}
+EXPOSE {{ ports | map(attribute='port') | join(' ') }}
+{%- endif %}
 
-# Volumes
-VOLUME /config
+# --- Volumes (Injected by Generator) ---
+{%- if volumes %}
+VOLUME {{ volumes | map(attribute='path') | join(' ') }}
+{%- endif %}
