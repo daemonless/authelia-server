@@ -1,0 +1,15 @@
+#!/bin/sh
+# Authelia s6 service
+
+#if [ -z "$TUNNEL_TOKEN" ]; then
+#    echo "[WARN] TUNNEL_TOKEN is not set. Starting in CIT mock mode."
+#    # Log version to prove binary is functional
+#    /usr/local/bin/authelia --version
+#    # Listen on port 9091 to satisfy CI port check
+#    exec /usr/bin/nc -lk 0.0.0.0 9091
+#fi
+
+echo "[INFO] Starting authelia..."
+
+# Standard start command for authelia
+/app/authelia --config /config/authelia.yml

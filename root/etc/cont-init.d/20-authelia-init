@@ -1,0 +1,18 @@
+#!/bin/sh
+# Initialize Authelia directories
+
+# Ensure directories exist and have correct ownership
+mkdir -p /config /data/certificates /data/assets
+chown -R bsd:bsd /config /data
+
+# Generate default config if missing
+if [ ! -f /config/authelia.yml ]; then
+    if [ ! -f /app/config.template.yml ]; then
+        cp /usr/local/etv/authelia.yml.sample /config/authelia.yml
+    else
+        cp /app/config.template.yml /config/authelia.yml
+    fi
+    chown bsd:bsd /config/authelia.yml
+
+    echo "Created default authelia.yml"
+fi
