@@ -1,0 +1,22 @@
+icon: ':simple-authelia:'
+cit:
+  mode: shell
+build:
+  pkg_name: authelia
+  auto_version: true
+  variants:
+    - tag: latest
+      containerfile: Containerfile
+      default: true
+    - tag: pkg
+      containerfile: Containerfile.pkg
+      args:
+        BASE_VERSION: "15-quarterly"
+      default: true
+    - tag: pkg-latest
+      containerfile: Containerfile.pkg
+      args:
+        BASE_VERSION: "15-latest"
+
+
+  

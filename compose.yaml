@@ -1,0 +1,43 @@
+name: authelia-server
+
+x-daemonless:
+  title: "Authelia"
+  icon: ":simple-authelia:"
+  category: "Infrastructure"
+  description: "Authelia on FreeBSD."
+  upstream_url: "https://github.com/authelia/authelia"
+  web_url: "https://authelia.org/"
+  freshports_url: "https://www.freshports.org/net-p2p/authelia/"
+  user: "bsd"
+  mlock: false
+  community: "Discord:https://discord.gg/Kb9tkhecZT"
+  notes: "This image is part of the [Authelia Stack](https://daemonless.io/images/authelia)."
+
+  docs:
+    env:
+      PUID: "User ID for the application process"
+      PGID: "Group ID for the application process"
+      TZ: "Timezone for the container"
+    volumes:
+      /config: "Configuration directory"
+      /data: "data directory"
+    ports:
+      9091: "Web UI"
+
+services:
+  authelia-server:
+    image: ghcr.io/daemonless/authelia-server:latest
+    container_name: authelia-server
+    restart: unless-stopped
+
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=UTC
+
+    volumes:
+      - /path/to/containers/authelia:/config
+      - /path/to/containers/authelia/data:/data
+
+    ports:
+      - 9091:9091

@@ -1,0 +1,58 @@
+ARG BASE_VERSION=15
+FROM ghcr.io/daemonless/base:${BASE_VERSION}
+
+ARG FREEBSD_ARCH=amd64
+ARG PACKAGES="authelia"
+ARG APP_VERSION="4.39.17"
+ARG DOWNLOAD_URL="https://github.com/authelia/authelia/releases/download/v${APP_VERSION}/authelia-v${APP_VERSION}-freebsd-${FREEBSD_ARCH}.tar.gz"
+ARG UPSTREAM_URL="https://github.com/authelia/authelia"
+ARG HEALTHCHECK_ENDPOINT="http://localhost:3000"
+
+LABEL org.opencontainers.image.title="{{ title }}" \
+      org.opencontainers.image.description="{{ description }}" \
+      org.opencontainers.image.source="{{ repo_url }}" \
+      org.opencontainers.image.url="{{ web_url }}" \
+      org.opencontainers.image.licenses="Apache-2.0" \
+      org.opencontainers.image.vendor="daemonless" \
+      org.opencontainers.image.authors="daemonless" \
+      io.daemonless.category="Infrastructure" \
+{%- if ports %}
+      io.daemonless.port="{{ ports[0].port }}" \
+{%- endif %}
+      io.daemonless.arch="${FREEBSD_ARCH}" \
+      io.daemonless.upstream-mode=github \
+      io.daemonless.upstream-repo=authelia/authelia \
+#      io.daemonless.upstream-url="${UPSTREAM_URL}" \
+#      io.daemonless.upstream-jq="${UPSTREAM_JQ}" \
+      io.daemonless.healthcheck-url="${HEALTHCHECK_ENDPOINT}" \
+      io.daemonless.wip="true"
+      
+
+# Install dependencies
+#RUN pkg update && \
+#    pkg install -y ${PACKAGES} && \
+#    pkg clean -ay && \
+#    rm -rf /var/cache/pkg/* /var/db/pkg/repos/*
+
+# Download and install authelia
+RUN fetch -qo /tmp/authelia.tar.gz "${DOWNLOAD_URL}" && \
+    mkdir -p /app && \
+    tar -xzf /tmp/authelia.tar.gz -C /app && \
+    rm /tmp/authelia.tar.gz && \
+    echo "${APP_VERSION}" > /app/version
+
+# Copy root filesystem
+COPY root/ /
+
+# Set permissions
+RUN chmod +x /etc/services.d/authelia/run /healthz
+
+# --- Expose (Injected by Generator) ---
+{%- if ports %}
+EXPOSE {{ ports | map(attribute='port') | join(' ') }}
+{%- endif %}
+
+# --- Volumes (Injected by Generator) ---
+{%- if volumes %}
+VOLUME {{ volumes | map(attribute='path') | join(' ') }}
+{%- endif %}
