@@ -2,10 +2,9 @@ ARG BASE_VERSION=15
 FROM ghcr.io/daemonless/base:${BASE_VERSION}
 
 ARG FREEBSD_ARCH=amd64
-ARG PACKAGES="authelia"
-ARG APP_VERSION="4.39.17"
-ARG DOWNLOAD_URL="https://github.com/authelia/authelia/releases/download/v${APP_VERSION}/authelia-v${APP_VERSION}-freebsd-${FREEBSD_ARCH}.tar.gz"
-ARG UPSTREAM_URL="https://github.com/authelia/authelia"
+ARG PACKAGES=""
+ARG UPSTREAM_URL="https://api.github.com/repos/authelia/authelia/releases/latest"
+ARG UPSTREAM_JQ=".tag_name"
 ARG HEALTHCHECK_ENDPOINT="http://localhost:3000"
 
 LABEL org.opencontainers.image.title="{{ title }}" \
@@ -22,8 +21,8 @@ LABEL org.opencontainers.image.title="{{ title }}" \
       io.daemonless.arch="${FREEBSD_ARCH}" \
       io.daemonless.upstream-mode=github \
       io.daemonless.upstream-repo=authelia/authelia \
-#      io.daemonless.upstream-url="${UPSTREAM_URL}" \
-#      io.daemonless.upstream-jq="${UPSTREAM_JQ}" \
+      io.daemonless.upstream-url="${UPSTREAM_URL}" \
+      io.daemonless.upstream-jq="${UPSTREAM_JQ}" \
       io.daemonless.healthcheck-url="${HEALTHCHECK_ENDPOINT}" \
       io.daemonless.wip="true"
       
@@ -35,7 +34,10 @@ LABEL org.opencontainers.image.title="{{ title }}" \
 #    rm -rf /var/cache/pkg/* /var/db/pkg/repos/*
 
 # Download and install authelia
-RUN fetch -qo /tmp/authelia.tar.gz "${DOWNLOAD_URL}" && \
+RUN APP_VERSION=$(fetch -qo - "${UPSTREAM_URL}" | \
+    jq -r "${UPSTREAM_JQ}" | sed -n 's/v\(.*\)/\1/p') && \
+    echo "Installing Authelia $APP_VERSION" && \
+    fetch -qo /tmp/authelia.tar.gz "https://github.com/authelia/authelia/releases/download/v${APP_VERSION}/authelia-v${APP_VERSION}-freebsd-${FREEBSD_ARCH}.tar.gz" && \
     mkdir -p /app && \
     tar -xzf /tmp/authelia.tar.gz -C /app && \
     rm /tmp/authelia.tar.gz && \
