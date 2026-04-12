@@ -13,7 +13,7 @@ Authelia on FreeBSD.
 | | |
 |---|---|
 | **Port** | 9091 |
-| **Registry** | `ghcr.io/varpon/authelia-server` |
+| **Registry** | `ghcr.io/daemonless/authelia-server` |
 | **Source** | [https://github.com/authelia/authelia](https://github.com/authelia/authelia) |
 | **Website** | [https://authelia.org/](https://authelia.org/) |
 
@@ -24,6 +24,8 @@ Authelia on FreeBSD.
 | `latest` | **Upstream Binary**. Built from official release. | Most users. Matches Linux Docker behavior. |
 | `pkg` | **FreeBSD Quarterly**. Uses stable, tested packages. | Most users. Matches Linux Docker behavior. |
 | `pkg-latest` | **FreeBSD Latest**. Rolling package updates. | Newest FreeBSD packages. |
+
+
 ## Prerequisites
 
 Before deploying, ensure your host environment is ready. See the [Quick Start Guide](https://daemonless.io/guides/quick-start) for host setup instructions.
@@ -37,7 +39,7 @@ Before deploying, ensure your host environment is ready. See the [Quick Start Gu
 ```yaml
 services:
   authelia-server:
-    image: ghcr.io/varpon/authelia-server:latest
+    image: ghcr.io/daemonless/authelia-server:latest
     container_name: authelia-server
     environment:
       - PUID=1000
@@ -62,7 +64,7 @@ podman run -d --name authelia-server \
   -e TZ=UTC \
   -v /path/to/containers/authelia-server:/config \
   -v /path/to/containers/authelia-server/data:/data \
-  ghcr.io/varpon/authelia-server:latest
+  ghcr.io/daemonless/authelia-server:latest
 ```
 
 ### Ansible
@@ -71,7 +73,7 @@ podman run -d --name authelia-server \
 - name: Deploy authelia-server
   containers.podman.podman_container:
     name: authelia-server
-    image: ghcr.io/varpon/authelia-server:latest
+    image: ghcr.io/daemonless/authelia-server:latest
     state: started
     restart_policy: always
     env:
