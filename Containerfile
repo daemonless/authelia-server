@@ -47,11 +47,12 @@ RUN APP_VERSION=$(fetch -qo - "${UPSTREAM_URL}" | \
     rm /tmp/authelia.tar.gz && \
     echo "${APP_VERSION}" > /app/version
 
-# Copy root filesystem
-COPY root/ /
+# Config directory
+RUN mkdir -p /config && chown -R bsd:bsd /config /app
 
-# Set permissions
-RUN chmod +x /etc/services.d/authelia/run /healthz
+# Copy s6 service files
+COPY root/ /
+RUN chmod +x /etc/services.d/*/run /etc/cont-init.d/* /healthz 2>/dev/null || true
 
 # --- Expose (Injected by Generator) ---
 EXPOSE 9091

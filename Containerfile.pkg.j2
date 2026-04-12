@@ -19,6 +19,10 @@ LABEL org.opencontainers.image.title="Authelia" \
       io.daemonless.wip="true"
       
 
+# Install from FreeBSD packages
+RUN pkg update && pkg install -y ${PACKAGES} && \
+    pkg clean -ay && rm -rf /var/cache/pkg/* /var/db/pkg/repos/*
+
 # Install dependencies
 RUN pkg update && \
     pkg install -y ${PACKAGES} && \
@@ -26,11 +30,17 @@ RUN pkg update && \
     mkdir -p /app && pkg info authelia | sed -n 's/.*Version.*: *//p' > /app/version && \
     rm -rf /var/cache/pkg/* /var/db/pkg/repos/*
 
-# Copy root filesystem
-COPY root/ /
+# Extract version
+RUN mkdir -p /app && \
+    pkg info authelia | sed -n 's/.*Version.*: *//p' > /app/version
 
-# Set permissions
-RUN chmod +x /etc/services.d/authelia/run /healthz
+# Copy root filesystem and set permissions
+COPY root/ /
+RUN if [ -f /etc/services.d/authelia/run.pkg ]; then \
+      mv /etc/services.d/authelia/run.pkg /etc/services.d/authelia/run; \
+    fi && \
+    chmod +x /etc/services.d/*/run /etc/cont-init.d/* /healthz 2>/dev/null || true
+
 
 # --- Expose (Injected by Generator) ---
 {%- if ports %}
