@@ -1,11 +1,11 @@
 {
-  "generated": "2026-04-12T20:41:37Z",
+  "generated": "2026-04-13T11:24:01Z",
   "image": "authelia-server",
   "tags": {
     "latest": {
       "app_version": "4.39.19",
       "arch": "amd64",
-      "generated": "2026-04-12T20:40:10Z",
+      "generated": "2026-04-13T11:22:17Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -564,7 +564,7 @@
     "pkg": {
       "app_version": "4.39.15_6",
       "arch": "amd64",
-      "generated": "2026-04-12T20:40:21Z",
+      "generated": "2026-04-13T11:22:16Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -1125,9 +1125,9 @@
       }
     },
     "pkg-latest": {
-      "app_version": "4.39.15_5",
+      "app_version": "4.39.18",
       "arch": "amd64",
-      "generated": "2026-04-12T20:40:27Z",
+      "generated": "2026-04-13T11:22:50Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -1249,7 +1249,7 @@
           },
           {
             "name": "authelia",
-            "version": "4.39.15_5"
+            "version": "4.39.18"
           },
           {
             "name": "ca_root_nss",
@@ -1283,19 +1283,19 @@
         "go": [
           {
             "name": "authelia.com/provider/oauth2",
-            "version": "v0.2.18"
+            "version": "v0.2.22"
           },
           {
             "name": "cel.dev/expr",
-            "version": "v0.24.0"
+            "version": "v0.25.1"
           },
           {
             "name": "filippo.io/edwards25519",
-            "version": "v1.1.0"
+            "version": "v1.2.0"
           },
           {
             "name": "github.com/Azure/go-ntlmssp",
-            "version": "v0.0.0-20221128193559-754e69321358"
+            "version": "v0.1.0"
           },
           {
             "name": "github.com/Gurpartap/logrus-stack",
@@ -1303,7 +1303,7 @@
           },
           {
             "name": "github.com/andybalholm/brotli",
-            "version": "v1.2.0"
+            "version": "v1.2.1"
           },
           {
             "name": "github.com/antlr4-go/antlr/v4",
@@ -1323,7 +1323,7 @@
           },
           {
             "name": "github.com/authelia/otp",
-            "version": "v1.0.3"
+            "version": "v1.0.4"
           },
           {
             "name": "github.com/beorn7/perks",
@@ -1355,7 +1355,7 @@
           },
           {
             "name": "github.com/duosecurity/duo_api_golang",
-            "version": "v0.0.0-20250430191550-ac36954387e7"
+            "version": "v0.2.0"
           },
           {
             "name": "github.com/dustin/go-humanize",
@@ -1379,7 +1379,7 @@
           },
           {
             "name": "github.com/fxamacker/cbor/v2",
-            "version": "v2.9.0"
+            "version": "v2.9.1"
           },
           {
             "name": "github.com/go-asn1-ber/asn1-ber",
@@ -1387,19 +1387,19 @@
           },
           {
             "name": "github.com/go-crypt/crypt",
-            "version": "v0.4.7"
+            "version": "v0.4.13"
           },
           {
             "name": "github.com/go-crypt/x",
-            "version": "v0.4.9"
+            "version": "v0.4.14"
           },
           {
             "name": "github.com/go-jose/go-jose/v4",
-            "version": "v4.1.3"
+            "version": "v4.1.4"
           },
           {
             "name": "github.com/go-ldap/ldap/v3",
-            "version": "v3.4.12"
+            "version": "v3.4.13"
           },
           {
             "name": "github.com/go-sql-driver/mysql",
@@ -1407,27 +1407,27 @@
           },
           {
             "name": "github.com/go-viper/mapstructure/v2",
-            "version": "v2.4.0"
+            "version": "v2.5.0"
           },
           {
             "name": "github.com/go-webauthn/webauthn",
-            "version": "v0.15.0"
+            "version": "v0.16.4"
           },
           {
             "name": "github.com/go-webauthn/x",
-            "version": "v0.1.26"
+            "version": "v0.2.3"
           },
           {
             "name": "github.com/golang-jwt/jwt/v5",
-            "version": "v5.3.0"
+            "version": "v5.3.1"
           },
           {
             "name": "github.com/google/cel-go",
-            "version": "v0.26.1"
+            "version": "v0.28.0"
           },
           {
             "name": "github.com/google/go-tpm",
-            "version": "v0.9.6"
+            "version": "v0.9.8"
           },
           {
             "name": "github.com/google/uuid",
@@ -1455,7 +1455,7 @@
           },
           {
             "name": "github.com/jackc/pgx/v5",
-            "version": "v5.7.6"
+            "version": "v5.9.1"
           },
           {
             "name": "github.com/jackc/puddle/v2",
@@ -1467,7 +1467,7 @@
           },
           {
             "name": "github.com/klauspost/compress",
-            "version": "v1.18.1"
+            "version": "v1.18.5"
           },
           {
             "name": "github.com/knadh/koanf/maps",
@@ -1491,11 +1491,11 @@
           },
           {
             "name": "github.com/knadh/koanf/v2",
-            "version": "v2.3.0"
+            "version": "v2.3.4"
           },
           {
             "name": "github.com/mattn/go-sqlite3",
-            "version": "v1.14.32"
+            "version": "v1.14.42"
           },
           {
             "name": "github.com/mitchellh/copystructure",
@@ -1515,7 +1515,7 @@
           },
           {
             "name": "github.com/philhofer/fwd",
-            "version": "v1.1.3-0.20240916144458-20a13a1f6b7c"
+            "version": "v1.2.0"
           },
           {
             "name": "github.com/pkg/errors",
@@ -1535,35 +1535,31 @@
           },
           {
             "name": "github.com/prometheus/common",
-            "version": "v0.66.1"
+            "version": "v0.67.5"
           },
           {
             "name": "github.com/prometheus/procfs",
-            "version": "v0.16.1"
+            "version": "v0.20.1"
           },
           {
             "name": "github.com/redis/go-redis/v9",
-            "version": "v9.8.0"
+            "version": "v9.18.0"
           },
           {
             "name": "github.com/savsgio/gotils",
-            "version": "v0.0.0-20250408102913-196191ec6287"
+            "version": "v0.0.0-20250924091648-bce9a52d7761"
           },
           {
             "name": "github.com/sirupsen/logrus",
-            "version": "v1.9.3"
+            "version": "v1.9.4"
           },
           {
             "name": "github.com/spf13/cobra",
-            "version": "v1.10.1"
+            "version": "v1.10.2"
           },
           {
             "name": "github.com/spf13/pflag",
             "version": "v1.0.10"
-          },
-          {
-            "name": "github.com/stoewer/go-strcase",
-            "version": "v1.3.0"
           },
           {
             "name": "github.com/stretchr/testify",
@@ -1571,7 +1567,7 @@
           },
           {
             "name": "github.com/tinylib/msgp",
-            "version": "v1.2.5"
+            "version": "v1.6.3"
           },
           {
             "name": "github.com/trustelem/zxcvbn",
@@ -1583,11 +1579,11 @@
           },
           {
             "name": "github.com/valyala/fasthttp",
-            "version": "v1.68.0"
+            "version": "v1.70.0"
           },
           {
             "name": "github.com/weppos/publicsuffix-go",
-            "version": "v0.50.1"
+            "version": "v0.50.3"
           },
           {
             "name": "github.com/wneessen/go-mail",
@@ -1598,64 +1594,68 @@
             "version": "v0.8.4"
           },
           {
+            "name": "go.uber.org/atomic",
+            "version": "v1.11.0"
+          },
+          {
             "name": "go.yaml.in/yaml/v2",
-            "version": "v2.4.2"
+            "version": "v2.4.4"
           },
           {
             "name": "go.yaml.in/yaml/v3",
-            "version": "v3.0.3"
+            "version": "v3.0.4"
           },
           {
             "name": "go.yaml.in/yaml/v4",
-            "version": "v4.0.0-rc.3"
+            "version": "v4.0.0-rc.4"
           },
           {
             "name": "golang.org/x/crypto",
-            "version": "v0.45.0"
+            "version": "v0.50.0"
           },
           {
             "name": "golang.org/x/exp",
-            "version": "v0.0.0-20250506013437-ce4c2cf36ca6"
+            "version": "v0.0.0-20260312153236-7ab1446f8b90"
           },
           {
             "name": "golang.org/x/net",
-            "version": "v0.47.0"
+            "version": "v0.53.0"
           },
           {
             "name": "golang.org/x/oauth2",
-            "version": "v0.33.0"
+            "version": "v0.36.0"
           },
           {
             "name": "golang.org/x/sync",
-            "version": "v0.18.0"
+            "version": "v0.20.0"
           },
           {
             "name": "golang.org/x/sys",
-            "version": "v0.38.0"
+            "version": "v0.43.0"
           },
           {
             "name": "golang.org/x/term",
-            "version": "v0.37.0"
+            "version": "v0.42.0"
           },
           {
             "name": "golang.org/x/text",
-            "version": "v0.31.0"
+            "version": "v0.36.0"
           },
           {
             "name": "golang.org/x/time",
-            "version": "v0.14.0"
+            "version": "v0.15.0"
           },
           {
             "name": "google.golang.org/genproto/googleapis/api",
-            "version": "v0.0.0-20250505200425-f936aa4a68b2"
+            "version": "v0.0.0-20260311181403-84a4fc48630c"
           },
           {
             "name": "google.golang.org/genproto/googleapis/rpc",
-            "version": "v0.0.0-20250505200425-f936aa4a68b2"
+            "version": "v0.0.0-20260311181403-84a4fc48630c"
           },
           {
             "name": "google.golang.org/protobuf",
-            "version": "v1.36.8"
+            "version": "v1.36.11"
           },
           {
             "name": "gopkg.in/yaml.v3",
@@ -1663,7 +1663,7 @@
           },
           {
             "name": "stdlib",
-            "version": "v1.25.8"
+            "version": "v1.26.2"
           }
         ],
         "java": [],
