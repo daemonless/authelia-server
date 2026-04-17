@@ -1,11 +1,11 @@
 {
-  "generated": "2026-04-13T11:24:01Z",
+  "generated": "2026-04-17T07:56:11Z",
   "image": "authelia-server",
   "tags": {
     "latest": {
       "app_version": "4.39.19",
       "arch": "amd64",
-      "generated": "2026-04-13T11:22:17Z",
+      "generated": "2026-04-17T07:54:25Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -131,7 +131,7 @@
           },
           {
             "name": "execline",
-            "version": "2.9.7.0"
+            "version": "2.9.8.1"
           },
           {
             "name": "jq",
@@ -143,15 +143,15 @@
           },
           {
             "name": "pkg",
-            "version": "2.5.1"
+            "version": "2.6.2_1"
           },
           {
             "name": "s6",
-            "version": "2.13.2.0"
+            "version": "2.14.0.1"
           },
           {
             "name": "skalibs",
-            "version": "2.14.4.0"
+            "version": "2.14.5.1"
           }
         ],
         "go": [
@@ -564,7 +564,7 @@
     "pkg": {
       "app_version": "4.39.15_6",
       "arch": "amd64",
-      "generated": "2026-04-13T11:22:16Z",
+      "generated": "2026-04-17T07:54:58Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -694,7 +694,7 @@
           },
           {
             "name": "execline",
-            "version": "2.9.7.0"
+            "version": "2.9.8.1"
           },
           {
             "name": "jq",
@@ -710,11 +710,11 @@
           },
           {
             "name": "s6",
-            "version": "2.13.2.0"
+            "version": "2.14.0.1"
           },
           {
             "name": "skalibs",
-            "version": "2.14.4.0"
+            "version": "2.14.5.1"
           }
         ],
         "go": [
@@ -1125,9 +1125,9 @@
       }
     },
     "pkg-latest": {
-      "app_version": "4.39.18",
+      "app_version": "4.39.19",
       "arch": "amd64",
-      "generated": "2026-04-13T11:22:50Z",
+      "generated": "2026-04-17T07:54:52Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -1249,7 +1249,7 @@
           },
           {
             "name": "authelia",
-            "version": "4.39.18"
+            "version": "4.39.19"
           },
           {
             "name": "ca_root_nss",
@@ -1269,7 +1269,7 @@
           },
           {
             "name": "pkg",
-            "version": "2.6.2_1"
+            "version": "2.7.3"
           },
           {
             "name": "s6",
