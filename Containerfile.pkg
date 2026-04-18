@@ -21,24 +21,14 @@ LABEL org.opencontainers.image.title="Authelia" \
       io.daemonless.category="Utilities" \
       io.daemonless.port="9091" \
       io.daemonless.arch="${FREEBSD_ARCH}" \
-      io.daemonless.packages="${PACKAGES}" \
-      io.daemonless.wip="true"
-      
+      io.daemonless.packages="${PACKAGES}"
 
 # Install from FreeBSD packages
-RUN pkg update && pkg install -y ${PACKAGES} && \
-    pkg clean -ay && rm -rf /var/cache/pkg/* /var/db/pkg/repos/*
-
-# Install dependencies
 RUN pkg update && \
     pkg install -y ${PACKAGES} && \
-    pkg clean -ay && \
     mkdir -p /app && pkg info authelia | sed -n 's/.*Version.*: *//p' > /app/version && \
+    pkg clean -ay && \
     rm -rf /var/cache/pkg/* /var/db/pkg/repos/*
-
-# Extract version
-RUN mkdir -p /app && \
-    pkg info authelia | sed -n 's/.*Version.*: *//p' > /app/version
 
 # Copy root filesystem and set permissions
 COPY root/ /
@@ -52,4 +42,4 @@ RUN if [ -f /etc/services.d/authelia/run.pkg ]; then \
 EXPOSE 9091
 
 # --- Volumes (Injected by Generator) ---
-VOLUME /config /data
+VOLUME /config

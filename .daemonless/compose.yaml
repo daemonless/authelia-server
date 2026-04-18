@@ -1,0 +1,34 @@
+name: authelia-test
+
+services:
+  authelia-server:
+    image: ghcr.io/daemonless/authelia-server:build
+    network_mode: host
+    restart: unless-stopped
+
+    environment:
+      PUID: 1000
+      PGID: 1000
+      TZ: UTC
+      CIT_RUN: true
+
+    volumes:
+      - config:/config
+
+    ports:
+      - 9099:9099
+
+    depends_on:
+      - redis
+
+  redis:
+    image: ghcr.io/daemonless/redis:latest
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - redis:/config
+
+volumes:
+  config:
+  redis:
