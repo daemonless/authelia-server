@@ -32,7 +32,7 @@ services:
       - PGID=1000
       - TZ=UTC
     volumes:
-      - /path/to/containers/authelia/config:/config
+      - /path/to/containers/authelia:/config
     ports:
       - 9091:9091
     depends_on:
