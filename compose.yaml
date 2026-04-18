@@ -1,4 +1,4 @@
-name: authelia-server
+name: authelia
 
 x-daemonless:
   title: "Authelia"
@@ -11,7 +11,6 @@ x-daemonless:
   user: "bsd"
   mlock: false
   community: "Discord:https://discord.gg/Kb9tkhecZT"
-  notes: "This image is part of the [Authelia Stack](https://daemonless.io/images/authelia)."
 
   docs:
     env:
@@ -20,7 +19,6 @@ x-daemonless:
       TZ: "Timezone for the container"
     volumes:
       /config: "Configuration directory"
-      /data: "data directory"
     ports:
       9091: "Web UI"
 
@@ -29,15 +27,24 @@ services:
     image: ghcr.io/daemonless/authelia-server:latest
     container_name: authelia-server
     restart: unless-stopped
-
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=UTC
-
     volumes:
       - /path/to/containers/authelia/config:/config
-      - /path/to/containers/authelia/data:/data
-
     ports:
       - 9091:9091
+    depends_on:
+      - redis
+
+  redis:
+    container_name: authelia_redis
+    image: ghcr.io/daemonless/redis:latest
+    restart: unless-stopped
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - redis:/config
+
+volumes:
+  redis:

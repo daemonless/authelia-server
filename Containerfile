@@ -11,7 +11,7 @@ ARG FREEBSD_ARCH=amd64
 ARG PACKAGES=""
 ARG UPSTREAM_URL="https://api.github.com/repos/authelia/authelia/releases/latest"
 ARG UPSTREAM_JQ=".tag_name"
-ARG HEALTHCHECK_ENDPOINT="http://localhost:3000"
+ARG HEALTHCHECK_ENDPOINT="http://localhost:9091/api/health"
 
 LABEL org.opencontainers.image.title="Authelia" \
       org.opencontainers.image.description="Authelia on FreeBSD." \
@@ -27,15 +27,7 @@ LABEL org.opencontainers.image.title="Authelia" \
       io.daemonless.upstream-repo=authelia/authelia \
       io.daemonless.upstream-url="${UPSTREAM_URL}" \
       io.daemonless.upstream-jq="${UPSTREAM_JQ}" \
-      io.daemonless.healthcheck-url="${HEALTHCHECK_ENDPOINT}" \
-      io.daemonless.wip="true"
-      
-
-# Install dependencies
-#RUN pkg update && \
-#    pkg install -y ${PACKAGES} && \
-#    pkg clean -ay && \
-#    rm -rf /var/cache/pkg/* /var/db/pkg/repos/*
+      io.daemonless.healthcheck-url="${HEALTHCHECK_ENDPOINT}"
 
 # Download and install authelia
 RUN APP_VERSION=$(fetch -qo - "${UPSTREAM_URL}" | \
@@ -58,4 +50,4 @@ RUN chmod +x /etc/services.d/*/run /etc/cont-init.d/* /healthz 2>/dev/null || tr
 EXPOSE 9091
 
 # --- Volumes (Injected by Generator) ---
-VOLUME /config /data
+VOLUME /config

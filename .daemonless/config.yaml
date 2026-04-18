@@ -1,6 +1,9 @@
 icon: ':simple-authelia:'
 cit:
-  mode: shell
+  compose: true
+  mode: health
+  port: 9099
+  health: /api/health
 build:
   pkg_name: authelia
   auto_version: true

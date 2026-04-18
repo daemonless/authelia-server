@@ -47,7 +47,6 @@ services:
       - TZ=UTC
     volumes:
       - "/path/to/containers/authelia-server:/config"
-      - "/path/to/containers/authelia-server/data:/data"
     ports:
       - 9091:9091
     restart: unless-stopped
@@ -63,7 +62,6 @@ podman run -d --name authelia-server \
   -e PGID=1000 \
   -e TZ=UTC \
   -v /path/to/containers/authelia-server:/config \
-  -v /path/to/containers/authelia-server/data:/data \
   ghcr.io/daemonless/authelia-server:latest
 ```
 
@@ -84,7 +82,6 @@ podman run -d --name authelia-server \
       - "9091:9091"
     volumes:
       - "/path/to/containers/authelia-server:/config"
-      - "/path/to/containers/authelia-server/data:/data"
 ```
 
 
@@ -103,15 +100,12 @@ podman run -d --name authelia-server \
 | Path | Description |
 |------|-------------|
 | `/config` | Configuration directory |
-| `/data` | data directory |
 
 ### Ports
 
 | Port | Protocol | Description |
 |------|----------|-------------|
 | `9091` | TCP | Web UI |
-
-This image is part of the [Authelia Stack](https://daemonless.io/images/authelia).
 
 **Architectures:** amd64
 **User:** `bsd` (UID/GID via PUID/PGID, defaults to 1000:1000)
