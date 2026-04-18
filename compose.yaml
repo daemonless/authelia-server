@@ -6,7 +6,7 @@ x-daemonless:
   category: "Infrastructure"
   description: "Authelia on FreeBSD."
   upstream_url: "https://github.com/authelia/authelia"
-  web_url: "https://authelia.org/"
+  web_url: "https://authelia.com/"
   freshports_url: "https://www.freshports.org/net-p2p/authelia/"
   user: "bsd"
   mlock: false

@@ -15,7 +15,7 @@ Authelia on FreeBSD.
 | **Port** | 9091 |
 | **Registry** | `ghcr.io/daemonless/authelia-server` |
 | **Source** | [https://github.com/authelia/authelia](https://github.com/authelia/authelia) |
-| **Website** | [https://authelia.org/](https://authelia.org/) |
+| **Website** | [https://authelia.com/](https://authelia.com/) |
 
 ## Version Tags
 
