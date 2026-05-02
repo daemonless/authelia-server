@@ -1,11 +1,11 @@
 {
-  "generated": "2026-04-18T15:18:20Z",
+  "generated": "2026-05-02T12:46:32Z",
   "image": "authelia-server",
   "tags": {
     "latest": {
       "app_version": "4.39.19",
       "arch": "amd64",
-      "generated": "2026-04-18T15:16:59Z",
+      "generated": "2026-05-02T12:45:04Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -79,11 +79,11 @@
           },
           {
             "name": "FreeBSD-openssl",
-            "version": "15.0"
+            "version": "15.0p2"
           },
           {
             "name": "FreeBSD-openssl-lib",
-            "version": "15.0"
+            "version": "15.0p2"
           },
           {
             "name": "FreeBSD-pkg-bootstrap",
@@ -95,7 +95,7 @@
           },
           {
             "name": "FreeBSD-runtime",
-            "version": "15.0"
+            "version": "15.0p6"
           },
           {
             "name": "FreeBSD-tcpd",
@@ -564,7 +564,7 @@
     "pkg": {
       "app_version": "4.39.15_6",
       "arch": "amd64",
-      "generated": "2026-04-18T15:16:43Z",
+      "generated": "2026-05-02T12:45:10Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -638,11 +638,11 @@
           },
           {
             "name": "FreeBSD-openssl",
-            "version": "15.0"
+            "version": "15.0p2"
           },
           {
             "name": "FreeBSD-openssl-lib",
-            "version": "15.0"
+            "version": "15.0p2"
           },
           {
             "name": "FreeBSD-pkg-bootstrap",
@@ -654,7 +654,7 @@
           },
           {
             "name": "FreeBSD-runtime",
-            "version": "15.0"
+            "version": "15.0p6"
           },
           {
             "name": "FreeBSD-tcpd",
@@ -1127,7 +1127,7 @@
     "pkg-latest": {
       "app_version": "4.39.19",
       "arch": "amd64",
-      "generated": "2026-04-18T15:17:12Z",
+      "generated": "2026-05-02T12:45:19Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -1201,11 +1201,11 @@
           },
           {
             "name": "FreeBSD-openssl",
-            "version": "15.0"
+            "version": "15.0p2"
           },
           {
             "name": "FreeBSD-openssl-lib",
-            "version": "15.0"
+            "version": "15.0p2"
           },
           {
             "name": "FreeBSD-pkg-bootstrap",
@@ -1217,7 +1217,7 @@
           },
           {
             "name": "FreeBSD-runtime",
-            "version": "15.0"
+            "version": "15.0p6"
           },
           {
             "name": "FreeBSD-tcpd",
@@ -1269,7 +1269,7 @@
           },
           {
             "name": "pkg",
-            "version": "2.7.3"
+            "version": "2.7.5"
           },
           {
             "name": "s6",
