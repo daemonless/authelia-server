@@ -4,4 +4,4 @@
 echo "[INFO] Starting authelia..."
 
 # Standard start command for authelia
-exec s6-setuidgid bsd /app/authelia --config /config/authelia.yml
+exec /usr/local/bin/s6-notifyoncheck -c /healthz /usr/local/bin/s6-setuidgid bsd /app/authelia --config /config/authelia.yml

@@ -29,6 +29,12 @@ LABEL org.opencontainers.image.title="Authelia" \
       io.daemonless.upstream-jq="${UPSTREAM_JQ}" \
       io.daemonless.healthcheck-url="${HEALTHCHECK_ENDPOINT}"
 
+# Update to latest patch level
+RUN pkg update -r FreeBSD-base && \
+    pkg upgrade -y -r FreeBSD-base && \
+    pkg clean -ay && \
+    rm -rf /var/cache/pkg/* /var/db/pkg/repos/*
+
 # Download and install authelia
 RUN APP_VERSION=$(fetch -qo - "${UPSTREAM_URL}" | \
     jq -r "${UPSTREAM_JQ}" | sed -n 's/v\(.*\)/\1/p') && \

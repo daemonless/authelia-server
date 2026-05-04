@@ -25,14 +25,11 @@ Authelia on FreeBSD.
 | `pkg` | **FreeBSD Quarterly**. Uses stable, tested packages. | Most users. Matches Linux Docker behavior. |
 | `pkg-latest` | **FreeBSD Latest**. Rolling package updates. | Newest FreeBSD packages. |
 
-
 ## Prerequisites
 
 Before deploying, ensure your host environment is ready. See the [Quick Start Guide](https://daemonless.io/guides/quick-start) for host setup instructions.
 
-
 ## Deployment
-
 
 ### Podman Compose
 
@@ -51,7 +48,6 @@ services:
       - 9091:9091
     restart: unless-stopped
 ```
-
 
 ### Podman CLI
 
@@ -83,7 +79,6 @@ podman run -d --name authelia-server \
     volumes:
       - "/path/to/containers/authelia-server:/config"
 ```
-
 
 ## Parameters
 
