@@ -1,11 +1,11 @@
 {
-  "generated": "2026-05-26T14:27:37Z",
+  "generated": "2026-05-29T21:24:03Z",
   "image": "authelia-server",
   "tags": {
     "latest": {
       "app_version": "4.39.20",
       "arch": "amd64",
-      "generated": "2026-05-26T14:25:58Z",
+      "generated": "2026-05-29T21:22:31Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -564,7 +564,7 @@
     "pkg": {
       "app_version": "4.39.15_7",
       "arch": "amd64",
-      "generated": "2026-05-26T14:26:22Z",
+      "generated": "2026-05-29T21:22:36Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -1125,9 +1125,9 @@
       }
     },
     "pkg-latest": {
-      "app_version": "4.39.19_1",
+      "app_version": "4.39.20",
       "arch": "amd64",
-      "generated": "2026-05-26T14:25:46Z",
+      "generated": "2026-05-29T21:22:50Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -1249,7 +1249,7 @@
           },
           {
             "name": "authelia",
-            "version": "4.39.19_1"
+            "version": "4.39.20"
           },
           {
             "name": "ca_root_nss",
@@ -1283,7 +1283,7 @@
         "go": [
           {
             "name": "authelia.com/provider/oauth2",
-            "version": "v0.2.22"
+            "version": "v0.2.31"
           },
           {
             "name": "cel.dev/expr",
@@ -1295,7 +1295,7 @@
           },
           {
             "name": "github.com/Azure/go-ntlmssp",
-            "version": "v0.1.0"
+            "version": "v0.1.1"
           },
           {
             "name": "github.com/Gurpartap/logrus-stack",
@@ -1375,23 +1375,23 @@
           },
           {
             "name": "github.com/fsnotify/fsnotify",
-            "version": "v1.9.0"
+            "version": "v1.10.1"
           },
           {
             "name": "github.com/fxamacker/cbor/v2",
-            "version": "v2.9.1"
+            "version": "v2.9.2"
           },
           {
             "name": "github.com/go-asn1-ber/asn1-ber",
-            "version": "v1.5.8-0.20250403174932-29230038a667"
+            "version": "v1.5.8-0.20260416181348-e7dc79048676"
           },
           {
             "name": "github.com/go-crypt/crypt",
-            "version": "v0.4.13"
+            "version": "v0.14.15"
           },
           {
             "name": "github.com/go-crypt/x",
-            "version": "v0.4.14"
+            "version": "v0.4.16"
           },
           {
             "name": "github.com/go-jose/go-jose/v4",
@@ -1403,7 +1403,7 @@
           },
           {
             "name": "github.com/go-sql-driver/mysql",
-            "version": "v1.9.3"
+            "version": "v1.10.0"
           },
           {
             "name": "github.com/go-viper/mapstructure/v2",
@@ -1411,11 +1411,11 @@
           },
           {
             "name": "github.com/go-webauthn/webauthn",
-            "version": "v0.16.4"
+            "version": "v0.17.4"
           },
           {
             "name": "github.com/go-webauthn/x",
-            "version": "v0.2.3"
+            "version": "v0.2.6"
           },
           {
             "name": "github.com/golang-jwt/jwt/v5",
@@ -1423,7 +1423,7 @@
           },
           {
             "name": "github.com/google/cel-go",
-            "version": "v0.28.0"
+            "version": "v0.28.1"
           },
           {
             "name": "github.com/google/go-tpm",
@@ -1455,19 +1455,15 @@
           },
           {
             "name": "github.com/jackc/pgx/v5",
-            "version": "v5.9.1"
+            "version": "v5.9.2"
           },
           {
             "name": "github.com/jackc/puddle/v2",
             "version": "v2.2.2"
           },
           {
-            "name": "github.com/jmoiron/sqlx",
-            "version": "v1.4.0"
-          },
-          {
             "name": "github.com/klauspost/compress",
-            "version": "v1.18.5"
+            "version": "v1.18.6"
           },
           {
             "name": "github.com/knadh/koanf/maps",
@@ -1495,7 +1491,7 @@
           },
           {
             "name": "github.com/mattn/go-sqlite3",
-            "version": "v1.14.42"
+            "version": "v1.14.44"
           },
           {
             "name": "github.com/mitchellh/copystructure",
@@ -1546,6 +1542,10 @@
             "version": "v9.18.0"
           },
           {
+            "name": "github.com/rpadovani/sqlx-v2",
+            "version": "v0.1.2"
+          },
+          {
             "name": "github.com/savsgio/gotils",
             "version": "v0.0.0-20250924091648-bce9a52d7761"
           },
@@ -1567,7 +1567,7 @@
           },
           {
             "name": "github.com/tinylib/msgp",
-            "version": "v1.6.3"
+            "version": "v1.6.4"
           },
           {
             "name": "github.com/trustelem/zxcvbn",
@@ -1579,7 +1579,7 @@
           },
           {
             "name": "github.com/valyala/fasthttp",
-            "version": "v1.70.0"
+            "version": "v1.71.0"
           },
           {
             "name": "github.com/weppos/publicsuffix-go",
@@ -1587,7 +1587,7 @@
           },
           {
             "name": "github.com/wneessen/go-mail",
-            "version": "v0.7.2"
+            "version": "v0.7.3"
           },
           {
             "name": "github.com/x448/float16",
@@ -1611,7 +1611,7 @@
           },
           {
             "name": "golang.org/x/crypto",
-            "version": "v0.50.0"
+            "version": "v0.52.0"
           },
           {
             "name": "golang.org/x/exp",
@@ -1619,7 +1619,7 @@
           },
           {
             "name": "golang.org/x/net",
-            "version": "v0.53.0"
+            "version": "v0.55.0"
           },
           {
             "name": "golang.org/x/oauth2",
@@ -1631,15 +1631,15 @@
           },
           {
             "name": "golang.org/x/sys",
-            "version": "v0.43.0"
+            "version": "v0.45.0"
           },
           {
             "name": "golang.org/x/term",
-            "version": "v0.42.0"
+            "version": "v0.43.0"
           },
           {
             "name": "golang.org/x/text",
-            "version": "v0.36.0"
+            "version": "v0.37.0"
           },
           {
             "name": "golang.org/x/time",
