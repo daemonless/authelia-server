@@ -1,11 +1,11 @@
 {
-  "generated": "2026-06-27T22:34:12Z",
+  "generated": "2026-07-02T10:06:28Z",
   "image": "authelia-server",
   "tags": {
     "latest": {
       "app_version": "4.39.20",
       "arch": "amd64",
-      "generated": "2026-06-27T22:32:54Z",
+      "generated": "2026-07-02T10:05:04Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -27,7 +27,7 @@
           },
           {
             "name": "FreeBSD-clibs",
-            "version": "15.0"
+            "version": "15.0p11"
           },
           {
             "name": "FreeBSD-ctf-lib",
@@ -95,7 +95,7 @@
           },
           {
             "name": "FreeBSD-runtime",
-            "version": "15.0p10"
+            "version": "15.0p11"
           },
           {
             "name": "FreeBSD-tcpd",
@@ -107,7 +107,7 @@
           },
           {
             "name": "FreeBSD-utilities",
-            "version": "15.0p10"
+            "version": "15.0p11"
           },
           {
             "name": "FreeBSD-xz-lib",
@@ -115,7 +115,7 @@
           },
           {
             "name": "FreeBSD-zfs-lib",
-            "version": "15.0p10"
+            "version": "15.0p11"
           },
           {
             "name": "FreeBSD-zlib",
@@ -564,7 +564,7 @@
     "pkg": {
       "app_version": "4.39.15_8",
       "arch": "amd64",
-      "generated": "2026-06-27T22:32:01Z",
+      "generated": "2026-07-02T10:05:14Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -586,7 +586,7 @@
           },
           {
             "name": "FreeBSD-clibs",
-            "version": "15.1"
+            "version": "15.1p1"
           },
           {
             "name": "FreeBSD-ctf-lib",
@@ -658,7 +658,7 @@
           },
           {
             "name": "FreeBSD-runtime",
-            "version": "15.1"
+            "version": "15.1p1"
           },
           {
             "name": "FreeBSD-tcpd",
@@ -670,7 +670,7 @@
           },
           {
             "name": "FreeBSD-utilities",
-            "version": "15.1"
+            "version": "15.1p1"
           },
           {
             "name": "FreeBSD-xz-lib",
@@ -678,7 +678,7 @@
           },
           {
             "name": "FreeBSD-zfs-lib",
-            "version": "15.1"
+            "version": "15.1p1"
           },
           {
             "name": "FreeBSD-zlib",
@@ -1133,9 +1133,9 @@
       }
     },
     "pkg-latest": {
-      "app_version": "4.39.20_1",
+      "app_version": "4.39.20_2",
       "arch": "amd64",
-      "generated": "2026-06-27T22:33:03Z",
+      "generated": "2026-07-02T10:04:51Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -1157,7 +1157,7 @@
           },
           {
             "name": "FreeBSD-clibs",
-            "version": "15.0"
+            "version": "15.0p11"
           },
           {
             "name": "FreeBSD-ctf-lib",
@@ -1225,7 +1225,7 @@
           },
           {
             "name": "FreeBSD-runtime",
-            "version": "15.0p10"
+            "version": "15.0p11"
           },
           {
             "name": "FreeBSD-tcpd",
@@ -1237,7 +1237,7 @@
           },
           {
             "name": "FreeBSD-utilities",
-            "version": "15.0p10"
+            "version": "15.0p11"
           },
           {
             "name": "FreeBSD-xz-lib",
@@ -1245,7 +1245,7 @@
           },
           {
             "name": "FreeBSD-zfs-lib",
-            "version": "15.0p10"
+            "version": "15.0p11"
           },
           {
             "name": "FreeBSD-zlib",
@@ -1257,7 +1257,7 @@
           },
           {
             "name": "authelia",
-            "version": "4.39.20_1"
+            "version": "4.39.20_2"
           },
           {
             "name": "ca_root_nss",
