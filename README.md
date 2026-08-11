@@ -18,15 +18,13 @@ Authelia on FreeBSD.
 | **Website** | [https://authelia.com/](https://authelia.com/) |
 
 ## Version Tags
-
 | Tag | Description | Best For |
 | :--- | :--- | :--- |
-| `latest` | **Upstream Binary**. Built from official release. | Most users. Matches Linux Docker behavior. |
-| `pkg` | **FreeBSD Quarterly**. Uses stable, tested packages. | Most users. Matches Linux Docker behavior. |
-| `pkg-latest` | **FreeBSD Latest**. Rolling package updates. | Newest FreeBSD packages. |
+| `latest` | **Upstream Binary**. Built from official release. | Most users — recommended. |
+| `pkg` | **FreeBSD Quarterly**. Uses stable, tested packages. | Most users — recommended. |
+| `pkg-latest` | **FreeBSD Latest**. Rolling package updates. | Staying current. |
 
 ## Prerequisites
-
 Before deploying, ensure your host environment is ready. See the [Quick Start Guide](https://daemonless.io/guides/quick-start) for host setup instructions.
 
 ## Deployment
@@ -36,18 +34,69 @@ Before deploying, ensure your host environment is ready. See the [Quick Start Gu
 ```yaml
 services:
   authelia-server:
-    image: ghcr.io/daemonless/authelia-server:latest
+    image: "ghcr.io/daemonless/authelia-server:latest"
     container_name: authelia-server
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=UTC
+      - PUID=1000  # User ID for the application process
+      - PGID=1000  # Group ID for the application process
+      - TZ=UTC  # Timezone for the container
     volumes:
       - "/path/to/containers/authelia-server:/config"
     ports:
-      - 9091:9091
+      - "9091:9091"
     restart: unless-stopped
 ```
+
+### AppJail Director
+**.env**:
+
+```
+# .env
+
+DIRECTOR_PROJECT=authelia-server
+PUID=1000
+PGID=1000
+TZ=UTC
+```
+
+**appjail-director.yml**:
+
+```yaml
+# appjail-director.yml
+
+options:
+  - virtualnet: ':<random> default'
+  - nat:
+services:
+  authelia-server:
+    name: authelia_server
+    options:
+      - container: 'boot args:--pull'
+      - expose: '9091:9091 proto:tcp'
+    oci:
+      user: root
+      environment:
+        - PUID: !ENV '${PUID}'
+        - PGID: !ENV '${PGID}'
+        - TZ: !ENV '${TZ}'
+    volumes:
+      - authelia-server: /config
+volumes:
+  authelia-server:
+    device: '/path/to/containers/authelia-server'
+```
+
+**Makejail**:
+
+```
+# Makejail
+
+ARG tag=latest
+
+OPTION overwrite=force
+OPTION from=ghcr.io/daemonless/authelia-server:${tag}
+```
+**Note**: Exposing ports in AppJail means that your service can be reached from remote hosts. If that is not your intention, do not expose the ports and communicate with the service using the IPv4 address assigned by the virtual network.
 
 ### Podman CLI
 
@@ -61,13 +110,30 @@ podman run -d --name authelia-server \
   ghcr.io/daemonless/authelia-server:latest
 ```
 
+### AppJail
+
+```bash
+appjail oci run -Pd \
+  -o overwrite=force \
+  -o container="args:--pull" \
+  -o virtualnet=":<random> default" \
+  -o nat \
+  -o expose="9091:9091 proto:tcp" \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ=UTC \
+  -o fstab="/path/to/containers/authelia-server /config <pseudofs>" \
+  ghcr.io/daemonless/authelia-server:latest authelia-server
+```
+**Note**: Exposing ports in AppJail means that your service can be reached from remote hosts. If that is not your intention, do not expose the ports and communicate with the service using the IPv4 address assigned by the virtual network.
+
 ### Ansible
 
 ```yaml
 - name: Deploy authelia-server
   containers.podman.podman_container:
     name: authelia-server
-    image: ghcr.io/daemonless/authelia-server:latest
+    image: "ghcr.io/daemonless/authelia-server:latest"
     state: started
     restart_policy: always
     env:
@@ -79,6 +145,8 @@ podman run -d --name authelia-server \
     volumes:
       - "/path/to/containers/authelia-server:/config"
 ```
+
+Access at: `http://localhost:9091`
 
 ## Parameters
 
@@ -104,7 +172,7 @@ podman run -d --name authelia-server \
 
 **Architectures:** amd64
 **User:** `bsd` (UID/GID via PUID/PGID, defaults to 1000:1000)
-**Base:** FreeBSD 15.0
+**Base:** FreeBSD 15
 
 ---
 
