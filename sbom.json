@@ -1,11 +1,11 @@
 {
-  "generated": "2026-08-18T07:48:51Z",
+  "generated": "2026-08-21T20:32:34Z",
   "image": "authelia-server",
   "tags": {
     "latest": {
       "app_version": "4.39.20",
       "arch": "amd64",
-      "generated": "2026-08-18T07:40:07Z",
+      "generated": "2026-08-21T20:29:28Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -238,7 +238,7 @@
               "MPL20"
             ],
             "name": "ca_root_nss",
-            "version": "3.125"
+            "version": "3.126.1"
           },
           {
             "licenses": [
@@ -789,7 +789,7 @@
     "pkg": {
       "app_version": "4.39.20_4",
       "arch": "amd64",
-      "generated": "2026-08-18T07:39:39Z",
+      "generated": "2026-08-21T20:29:09Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -1029,7 +1029,7 @@
               "MPL20"
             ],
             "name": "ca_root_nss",
-            "version": "3.125"
+            "version": "3.126.1"
           },
           {
             "licenses": [
@@ -1578,9 +1578,9 @@
       }
     },
     "pkg-latest": {
-      "app_version": "4.39.20_4",
+      "app_version": "4.39.20_5",
       "arch": "amd64",
-      "generated": "2026-08-18T07:40:25Z",
+      "generated": "2026-08-21T20:29:45Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -1813,14 +1813,14 @@
               "APACHE20"
             ],
             "name": "authelia",
-            "version": "4.39.20_4"
+            "version": "4.39.20_5"
           },
           {
             "licenses": [
               "MPL20"
             ],
             "name": "ca_root_nss",
-            "version": "3.125"
+            "version": "3.126.1"
           },
           {
             "licenses": [
@@ -2344,7 +2344,7 @@
           {
             "name": "stdlib",
             "purl": "",
-            "version": "v1.26.6"
+            "version": "v1.26.7"
           }
         ],
         "java": [],
