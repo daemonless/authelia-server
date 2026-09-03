@@ -1,11 +1,11 @@
 {
-  "generated": "2026-08-24T14:04:58Z",
+  "generated": "2026-09-03T08:38:27Z",
   "image": "authelia-server",
   "tags": {
     "latest": {
-      "app_version": "4.39.20",
+      "app_version": "4.39.22",
       "arch": "amd64",
-      "generated": "2026-08-24T13:57:58Z",
+      "generated": "2026-09-03T08:34:36Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -147,7 +147,7 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-openssl-lib",
-            "version": "15.1"
+            "version": "15.1p3"
           },
           {
             "licenses": [
@@ -175,7 +175,7 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-runtime",
-            "version": "15.1p2"
+            "version": "15.1p3"
           },
           {
             "licenses": [
@@ -238,7 +238,7 @@
               "MPL20"
             ],
             "name": "ca_root_nss",
-            "version": "3.126.1"
+            "version": "3.127"
           },
           {
             "licenses": [
@@ -287,7 +287,12 @@
           {
             "name": "authelia.com/provider/oauth2",
             "purl": "",
-            "version": "v0.2.31"
+            "version": "v0.3.0"
+          },
+          {
+            "name": "cel.dev/cel-go",
+            "purl": "",
+            "version": "v0.32.0"
           },
           {
             "name": "cel.dev/expr",
@@ -312,7 +317,7 @@
           {
             "name": "github.com/andybalholm/brotli",
             "purl": "",
-            "version": "v1.2.1"
+            "version": "v1.2.2"
           },
           {
             "name": "github.com/antlr4-go/antlr/v4",
@@ -327,7 +332,7 @@
           {
             "name": "github.com/authelia/authelia/v4",
             "purl": "",
-            "version": "v4.39.20+dirty"
+            "version": "v4.39.22+dirty"
           },
           {
             "name": "github.com/authelia/jsonschema",
@@ -355,11 +360,6 @@
             "version": "v2.3.0"
           },
           {
-            "name": "github.com/davecgh/go-spew",
-            "purl": "",
-            "version": "v1.1.1"
-          },
-          {
             "name": "github.com/dgraph-io/ristretto",
             "purl": "",
             "version": "v0.2.0"
@@ -377,7 +377,7 @@
           {
             "name": "github.com/duosecurity/duo_api_golang",
             "purl": "",
-            "version": "v0.2.0"
+            "version": "v0.3.0"
           },
           {
             "name": "github.com/dustin/go-humanize",
@@ -407,12 +407,12 @@
           {
             "name": "github.com/fxamacker/cbor/v2",
             "purl": "",
-            "version": "v2.9.2"
+            "version": "v2.9.3"
           },
           {
             "name": "github.com/go-asn1-ber/asn1-ber",
             "purl": "",
-            "version": "v1.5.8-0.20260416181348-e7dc79048676"
+            "version": "v1.5.8"
           },
           {
             "name": "github.com/go-crypt/crypt",
@@ -425,19 +425,14 @@
             "version": "v0.4.16"
           },
           {
-            "name": "github.com/go-jose/go-jose/v4",
-            "purl": "",
-            "version": "v4.1.4"
-          },
-          {
             "name": "github.com/go-ldap/ldap/v3",
             "purl": "",
-            "version": "v3.4.13"
+            "version": "v3.4.14"
           },
           {
             "name": "github.com/go-sql-driver/mysql",
             "purl": "",
-            "version": "v1.10.0"
+            "version": "v1.10.1"
           },
           {
             "name": "github.com/go-viper/mapstructure/v2",
@@ -447,22 +442,17 @@
           {
             "name": "github.com/go-webauthn/webauthn",
             "purl": "",
-            "version": "v0.17.4"
+            "version": "v0.18.0"
           },
           {
             "name": "github.com/go-webauthn/x",
             "purl": "",
-            "version": "v0.2.6"
+            "version": "v0.3.0"
           },
           {
             "name": "github.com/golang-jwt/jwt/v5",
             "purl": "",
             "version": "v5.3.1"
-          },
-          {
-            "name": "github.com/google/cel-go",
-            "purl": "",
-            "version": "v0.28.1"
           },
           {
             "name": "github.com/google/go-tpm",
@@ -502,7 +492,7 @@
           {
             "name": "github.com/jackc/pgx/v5",
             "purl": "",
-            "version": "v5.9.2"
+            "version": "v5.10.0"
           },
           {
             "name": "github.com/jackc/puddle/v2",
@@ -512,7 +502,7 @@
           {
             "name": "github.com/klauspost/compress",
             "purl": "",
-            "version": "v1.18.6"
+            "version": "v1.19.1"
           },
           {
             "name": "github.com/knadh/koanf/maps",
@@ -522,32 +512,32 @@
           {
             "name": "github.com/knadh/koanf/parsers/yaml",
             "purl": "",
-            "version": "v1.1.0"
+            "version": "v1.1.1"
           },
           {
             "name": "github.com/knadh/koanf/providers/confmap",
             "purl": "",
-            "version": "v1.0.0"
+            "version": "v1.0.1"
           },
           {
             "name": "github.com/knadh/koanf/providers/env/v2",
             "purl": "",
-            "version": "v2.0.0"
+            "version": "v2.0.1"
           },
           {
             "name": "github.com/knadh/koanf/providers/posflag",
             "purl": "",
-            "version": "v1.0.1"
+            "version": "v1.0.2"
           },
           {
             "name": "github.com/knadh/koanf/v2",
             "purl": "",
-            "version": "v2.3.4"
+            "version": "v2.3.6"
           },
           {
             "name": "github.com/mattn/go-sqlite3",
             "purl": "",
-            "version": "v1.14.44"
+            "version": "v1.14.50"
           },
           {
             "name": "github.com/mitchellh/copystructure",
@@ -580,14 +570,9 @@
             "version": "v0.9.1"
           },
           {
-            "name": "github.com/pmezard/go-difflib",
-            "purl": "",
-            "version": "v1.0.0"
-          },
-          {
             "name": "github.com/prometheus/client_golang",
             "purl": "",
-            "version": "v1.23.2"
+            "version": "v1.24.1"
           },
           {
             "name": "github.com/prometheus/client_model",
@@ -597,12 +582,12 @@
           {
             "name": "github.com/prometheus/common",
             "purl": "",
-            "version": "v0.67.5"
+            "version": "v0.70.1"
           },
           {
             "name": "github.com/prometheus/procfs",
             "purl": "",
-            "version": "v0.20.1"
+            "version": "v0.21.1"
           },
           {
             "name": "github.com/redis/go-redis/v9",
@@ -622,7 +607,7 @@
           {
             "name": "github.com/sirupsen/logrus",
             "purl": "",
-            "version": "v1.9.4"
+            "version": "v1.10.2"
           },
           {
             "name": "github.com/spf13/cobra",
@@ -637,7 +622,7 @@
           {
             "name": "github.com/stretchr/testify",
             "purl": "",
-            "version": "v1.11.1"
+            "version": "v1.12.1"
           },
           {
             "name": "github.com/tinylib/msgp",
@@ -657,7 +642,7 @@
           {
             "name": "github.com/valyala/fasthttp",
             "purl": "",
-            "version": "v1.71.0"
+            "version": "v1.73.0"
           },
           {
             "name": "github.com/weppos/publicsuffix-go",
@@ -667,7 +652,7 @@
           {
             "name": "github.com/wneessen/go-mail",
             "purl": "",
-            "version": "v0.7.3"
+            "version": "v0.8.1"
           },
           {
             "name": "github.com/x448/float16",
@@ -680,24 +665,19 @@
             "version": "v1.11.0"
           },
           {
-            "name": "go.yaml.in/yaml/v2",
-            "purl": "",
-            "version": "v2.4.4"
-          },
-          {
             "name": "go.yaml.in/yaml/v3",
             "purl": "",
-            "version": "v3.0.4"
+            "version": "v3.0.5"
           },
           {
             "name": "go.yaml.in/yaml/v4",
             "purl": "",
-            "version": "v4.0.0-rc.4"
+            "version": "v4.0.0-rc.6"
           },
           {
             "name": "golang.org/x/crypto",
             "purl": "",
-            "version": "v0.52.0"
+            "version": "v0.56.0"
           },
           {
             "name": "golang.org/x/exp",
@@ -707,7 +687,7 @@
           {
             "name": "golang.org/x/net",
             "purl": "",
-            "version": "v0.55.0"
+            "version": "v0.58.0"
           },
           {
             "name": "golang.org/x/oauth2",
@@ -717,22 +697,22 @@
           {
             "name": "golang.org/x/sync",
             "purl": "",
-            "version": "v0.20.0"
+            "version": "v0.22.0"
           },
           {
             "name": "golang.org/x/sys",
             "purl": "",
-            "version": "v0.45.0"
+            "version": "v0.47.0"
           },
           {
             "name": "golang.org/x/term",
             "purl": "",
-            "version": "v0.43.0"
+            "version": "v0.45.0"
           },
           {
             "name": "golang.org/x/text",
             "purl": "",
-            "version": "v0.37.0"
+            "version": "v0.41.0"
           },
           {
             "name": "golang.org/x/time",
@@ -755,14 +735,9 @@
             "version": "v1.36.11"
           },
           {
-            "name": "gopkg.in/yaml.v3",
-            "purl": "",
-            "version": "v3.0.1"
-          },
-          {
             "name": "stdlib",
             "purl": "",
-            "version": "v1.26.3"
+            "version": "v1.27.1"
           }
         ],
         "java": [],
@@ -776,20 +751,20 @@
       "summary": {
         "dotnet": 0,
         "freebsd": 39,
-        "go": 96,
+        "go": 91,
         "java": 0,
         "node": 0,
         "php": 0,
         "python": 0,
         "ruby": 0,
         "rust": 0,
-        "total": 135
+        "total": 130
       }
     },
     "pkg": {
       "app_version": "4.39.20_5",
       "arch": "amd64",
-      "generated": "2026-08-24T13:58:30Z",
+      "generated": "2026-09-03T08:35:04Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -931,7 +906,7 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-openssl-lib",
-            "version": "15.1"
+            "version": "15.1p3"
           },
           {
             "licenses": [
@@ -959,7 +934,7 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-runtime",
-            "version": "15.1p2"
+            "version": "15.1p3"
           },
           {
             "licenses": [
@@ -1029,7 +1004,7 @@
               "MPL20"
             ],
             "name": "ca_root_nss",
-            "version": "3.126.1"
+            "version": "3.127"
           },
           {
             "licenses": [
@@ -1580,7 +1555,7 @@
     "pkg-latest": {
       "app_version": "4.39.20_5",
       "arch": "amd64",
-      "generated": "2026-08-24T13:59:32Z",
+      "generated": "2026-09-03T08:37:54Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -1722,7 +1697,7 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-openssl-lib",
-            "version": "15.1"
+            "version": "15.1p3"
           },
           {
             "licenses": [
@@ -1750,7 +1725,7 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-runtime",
-            "version": "15.1p2"
+            "version": "15.1p3"
           },
           {
             "licenses": [
@@ -1820,7 +1795,7 @@
               "MPL20"
             ],
             "name": "ca_root_nss",
-            "version": "3.126.1"
+            "version": "3.127"
           },
           {
             "licenses": [
