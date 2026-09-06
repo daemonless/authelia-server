@@ -1,11 +1,11 @@
 {
-  "generated": "2026-09-03T08:38:27Z",
+  "generated": "2026-09-06T21:22:03Z",
   "image": "authelia-server",
   "tags": {
     "latest": {
       "app_version": "4.39.22",
       "arch": "amd64",
-      "generated": "2026-09-03T08:34:36Z",
+      "generated": "2026-09-06T21:17:44Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -764,7 +764,7 @@
     "pkg": {
       "app_version": "4.39.20_5",
       "arch": "amd64",
-      "generated": "2026-09-03T08:35:04Z",
+      "generated": "2026-09-06T21:18:04Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -1553,9 +1553,9 @@
       }
     },
     "pkg-latest": {
-      "app_version": "4.39.20_5",
+      "app_version": "4.39.20_6",
       "arch": "amd64",
-      "generated": "2026-09-03T08:37:54Z",
+      "generated": "2026-09-06T21:18:24Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -1788,7 +1788,7 @@
               "APACHE20"
             ],
             "name": "authelia",
-            "version": "4.39.20_5"
+            "version": "4.39.20_6"
           },
           {
             "licenses": [
@@ -2319,7 +2319,7 @@
           {
             "name": "stdlib",
             "purl": "",
-            "version": "v1.26.7"
+            "version": "v1.26.8"
           }
         ],
         "java": [],
