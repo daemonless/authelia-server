@@ -11,12 +11,27 @@ x-daemonless:
   user: "bsd"
   mlock: false
   community: "Discord:https://discord.gg/Kb9tkhecZT"
+  type: stack
+  # Host networking: Authelia's configuration.yml points its session store
+  # at redis on 127.0.0.1, which is true on podman and AppJail alike.
+  appjail:
+    director:
+      options:
+        - alias:
+        - ip4_inherit:
+    depends_on:
+      - name: authelia-redis
+        image: ghcr.io/daemonless/redis:latest
+        volumes:
+          redis_data: /config
 
   docs:
     env:
       PUID: "User ID for the application process"
       PGID: "Group ID for the application process"
       TZ: "Timezone for the container"
+      CONFIG_LOCATION: "Path to the Authelia configuration directory (configuration.yml, users database)"
+      REDIS_DATA_LOCATION: "Path to store the redis session store"
     volumes:
       /config: "Configuration directory"
     ports:
@@ -27,14 +42,13 @@ services:
     image: ghcr.io/daemonless/authelia-server:latest
     container_name: authelia-server
     restart: unless-stopped
+    network_mode: host
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=UTC
+      - TZ=${TZ:-UTC}
     volumes:
-      - /path/to/containers/authelia:/config
-    ports:
-      - 9091:9091
+      - ${CONFIG_LOCATION}:/config
     depends_on:
       - redis
 
@@ -42,9 +56,7 @@ services:
     container_name: authelia_redis
     image: ghcr.io/daemonless/redis:latest
     restart: unless-stopped
+    network_mode: host
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - redis:/config
-
-volumes:
-  redis:
+      - ${REDIS_DATA_LOCATION}:/config
