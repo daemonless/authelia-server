@@ -7,6 +7,7 @@ Source: dbuild templates
 
 [![Build Status](https://img.shields.io/github/actions/workflow/status/daemonless/authelia-server/build.yaml?style=flat-square&label=Build&color=green)](https://github.com/daemonless/authelia-server/actions)
 [![Last Commit](https://img.shields.io/github/last-commit/daemonless/authelia-server?style=flat-square&label=Last+Commit&color=blue)](https://github.com/daemonless/authelia-server/commits)
+[![OCI Pulls](https://img.shields.io/docker/pulls/daemonless/authelia-server?style=flat-square&label=OCI+Pulls&color=blue)](https://hub.docker.com/r/daemonless/authelia-server)
 
 Authelia on FreeBSD.
 
@@ -39,7 +40,9 @@ services:
     environment:
       - PUID=1000  # User ID for the application process
       - PGID=1000  # Group ID for the application process
-      - TZ=UTC  # Timezone for the container
+      - TZ=${TZ:-UTC}  # Timezone for the container
+      - CONFIG_LOCATION=  # Path to the Authelia configuration directory (configuration.yml, users database)
+      - REDIS_DATA_LOCATION=  # Path to store the redis session store
     volumes:
       - "/path/to/containers/authelia-server:/config"
     ports:
@@ -59,7 +62,9 @@ Save as `compose.yaml`, then run `podman-compose up -d`.
 DIRECTOR_PROJECT=authelia-server
 PUID=1000
 PGID=1000
-TZ=UTC
+TZ=${TZ:-UTC}
+CONFIG_LOCATION=
+REDIS_DATA_LOCATION=
 ```
 
 **appjail-director.yml**:
@@ -68,13 +73,13 @@ TZ=UTC
 # appjail-director.yml
 
 options:
-  - virtualnet: ':<random> default'
-  - nat:
+  - alias:
+  - ip4_inherit:
 services:
   authelia-server:
     name: authelia_server
     options:
-      - container: 'boot args:--pull'
+      - container: 'args:--pull'
       - expose: '9091:9091 proto:tcp'
     oci:
       user: root
@@ -82,11 +87,22 @@ services:
         - PUID: !ENV '${PUID}'
         - PGID: !ENV '${PGID}'
         - TZ: !ENV '${TZ}'
+        - CONFIG_LOCATION: !ENV '${CONFIG_LOCATION}'
+        - REDIS_DATA_LOCATION: !ENV '${REDIS_DATA_LOCATION}'
     volumes:
       - authelia-server: /config
+  authelia-redis:
+    name: authelia_redis
+    options:
+      - from: ghcr.io/daemonless/redis:latest
+      - template: !ENV '${PWD}/template.conf'
+    volumes:
+      - redis_data: /config
 volumes:
   authelia-server:
     device: '/path/to/containers/authelia-server'
+  redis_data:
+    device: !ENV '${REDIS_DATA_LOCATION}'
 ```
 
 **Makejail**:
@@ -96,13 +112,18 @@ volumes:
 
 ARG tag=latest
 
+OPTION container=boot
 OPTION overwrite=force
 OPTION from=ghcr.io/daemonless/authelia-server:${tag}
 ```
 
 Save the files above, then run `appjail-director up`.
 
-**Note**: Exposing ports in AppJail means that your service can be reached from remote hosts. If that is not your intention, do not expose the ports and communicate with the service using the IPv4 address assigned by the virtual network.
+
+> [!WARNING]
+> Exposing ports in AppJail means that your service can be reached from remote hosts. If that is not your intention, do not expose the ports and communicate with the service using the jail's IPv4 address or hostname assigned by the virtual network.
+>
+> To avoid exposing ports, just remove the `expose` option in your `appjail-director.yml` or from your command-line arguments.
 
 ### Podman CLI
 
@@ -111,7 +132,9 @@ podman run -d --name authelia-server \
   -p 9091:9091 \
   -e PUID=1000 \
   -e PGID=1000 \
-  -e TZ=UTC \
+  -e TZ=${TZ:-UTC} \
+  -e CONFIG_LOCATION= \
+  -e REDIS_DATA_LOCATION= \
   -v /path/to/containers/authelia-server:/config \
   ghcr.io/daemonless/authelia-server:latest
 ```
@@ -119,6 +142,7 @@ podman run -d --name authelia-server \
 Save as `run.sh`, then run `sh run.sh`.
 
 ### AppJail
+
 
 ```bash
 appjail oci run -Pd \
@@ -129,40 +153,53 @@ appjail oci run -Pd \
   -o expose="9091:9091 proto:tcp" \
   -e PUID=1000 \
   -e PGID=1000 \
-  -e TZ=UTC \
+  -e TZ=${TZ:-UTC} \
+  -e CONFIG_LOCATION= \
+  -e REDIS_DATA_LOCATION= \
   -o fstab="/path/to/containers/authelia-server /config <pseudofs>" \
   ghcr.io/daemonless/authelia-server:latest authelia-server
 ```
 
-Save as `run.sh`, then run `sh run.sh`.
+Save the files above, then run `sh run.sh`.
 
-**Note**: Exposing ports in AppJail means that your service can be reached from remote hosts. If that is not your intention, do not expose the ports and communicate with the service using the IPv4 address assigned by the virtual network.
+
+> [!WARNING]
+> Exposing ports in AppJail means that your service can be reached from remote hosts. If that is not your intention, do not expose the ports and communicate with the service using the jail's IPv4 address or hostname assigned by the virtual network.
+>
+> To avoid exposing ports, just remove the `expose` option in your `appjail-director.yml` or from your command-line arguments.
 
 ### Bastille
 
 > [!WARNING]
-> Bastille's OCI support is **experimental**. It requires `buildah`, shares the host network stack (`inherit`), and persists image-declared volumes under `--data-path`.
+> Bastille's OCI support is **experimental**. It requires `buildah` and shares the host network stack (`inherit`). Mount volumes with `--volume HOST JAIL`; without it, image-declared volumes are stored under `${bastille_volumesdir}/${jail}`.
 
 ```yaml
 services:
   authelia-server:
+    name: authelia-server
     image: "ghcr.io/daemonless/authelia-server:latest"
-    container_name: authelia-server
-    network_mode: host  # jail shares host networking
+    network:
+      - mode: host
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=UTC
+      - TZ=${TZ:-UTC}
+      - CONFIG_LOCATION=
+      - REDIS_DATA_LOCATION=
+    volumes:
+      - "/path/to/containers/authelia-server:/config"
 ```
 
-Save as `podman-compose.yml`, then run `bastille up`. Or via CLI:
+Save as `bastille-compose.yml`, then run `bastille up`. Or via CLI:
 
 ```bash
 bastille create -O \
   --env PUID=1000 \
   --env PGID=1000 \
-  --env TZ=UTC \
-  --data-path /path/to/containers/authelia-server \
+  --env TZ=${TZ:-UTC} \
+  --env CONFIG_LOCATION= \
+  --env REDIS_DATA_LOCATION= \
+  --volume /path/to/containers/authelia-server /config \
   authelia-server ghcr.io/daemonless/authelia-server:latest inherit
 ```
 
@@ -178,7 +215,9 @@ bastille create -O \
     env:
       PUID: "1000"
       PGID: "1000"
-      TZ: "UTC"
+      TZ: "${TZ:-UTC}"
+      CONFIG_LOCATION: ""
+      REDIS_DATA_LOCATION: ""
     ports:
       - "9091:9091"
     volumes:
@@ -197,7 +236,9 @@ Access at: `http://localhost:9091`
 |----------|---------|-------------|
 | `PUID` | `1000` | User ID for the application process |
 | `PGID` | `1000` | Group ID for the application process |
-| `TZ` | `UTC` | Timezone for the container |
+| `TZ` | `${TZ:-UTC}` | Timezone for the container |
+| `CONFIG_LOCATION` | `` | Path to the Authelia configuration directory (configuration.yml, users database) |
+| `REDIS_DATA_LOCATION` | `` | Path to store the redis session store |
 
 ### Volumes
 
