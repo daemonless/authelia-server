@@ -70,6 +70,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=${TZ:-UTC}
+      - AUTHELIA_SESSION_REDIS_HOST=${AUTHELIA_SESSION_REDIS_HOST:-127.0.0.1}
     volumes:
       - ${CONFIG_LOCATION}:/config
     ports:
@@ -99,6 +100,7 @@ DIRECTOR_PROJECT=authelia-server
 PUID=1000
 PGID=1000
 TZ=UTC
+AUTHELIA_SESSION_REDIS_HOST=127.0.0.1
 CONFIG_LOCATION=/containers/authelia/config
 REDIS_DATA_LOCATION=/containers/authelia/redis
 ```
@@ -123,12 +125,13 @@ services:
         - PUID: !ENV '${PUID}'
         - PGID: !ENV '${PGID}'
         - TZ: !ENV '${TZ}'
+        - AUTHELIA_SESSION_REDIS_HOST: !ENV '${AUTHELIA_SESSION_REDIS_HOST}'
         - CONFIG_LOCATION: !ENV '${CONFIG_LOCATION}'
         - REDIS_DATA_LOCATION: !ENV '${REDIS_DATA_LOCATION}'
     volumes:
       - authelia-server: /config
-  authelia-redis:
-    name: authelia_redis
+  redis:
+    name: redis
     options:
       - from: ghcr.io/daemonless/redis:latest
       - template: !ENV '${PWD}/template.conf'
@@ -172,6 +175,7 @@ Access at: `http://localhost:9091`
 | `PUID` | `1000` | User ID for the application process |
 | `PGID` | `1000` | Group ID for the application process |
 | `TZ` | `UTC` | Timezone for the container |
+| `AUTHELIA_SESSION_REDIS_HOST` | `127.0.0.1` | Where Authelia finds redis; overrides session.redis.host (fjord sets this; 127.0.0.1 on host networking) |
 | `CONFIG_LOCATION` | `/containers/authelia/config` | Path to the Authelia configuration directory (configuration.yml, users database) |
 | `REDIS_DATA_LOCATION` | `/containers/authelia/redis` | Path to store the redis session store |
 
