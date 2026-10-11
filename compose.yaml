@@ -11,15 +11,23 @@ x-daemonless:
   user: "bsd"
   mlock: false
   community: "Discord:https://discord.gg/Kb9tkhecZT"
-  # Host networking: Authelia's configuration.yml points its session store
-  # at redis on 127.0.0.1, which is true on podman and AppJail alike.
+  # authelia is the one people open; redis stays on the stack's private
+  # network. AUTHELIA_SESSION_REDIS_HOST (fjord sets it; 127.0.0.1 on host
+  # networking) overrides session.redis.host in configuration.yml.
+  networking:
+    authelia-server: default
+    "*": private
+  hostnames:
+    redis: AUTHELIA_SESSION_REDIS_HOST
+  # Sidecar for the AppJail director bundle, named as the service is so fjord
+  # finds its jail by the service's name.
   appjail:
     director:
       options:
         - alias:
         - ip4_inherit:
     depends_on:
-      - name: authelia-redis
+      - name: redis
         image: ghcr.io/daemonless/redis:latest
         volumes:
           redis_data: /config
@@ -31,6 +39,10 @@ x-daemonless:
       TZ: "Timezone for the container"
       CONFIG_LOCATION: "Path to the Authelia configuration directory (configuration.yml, users database)"
       REDIS_DATA_LOCATION: "Path to store the redis session store"
+      AUTHELIA_SESSION_REDIS_HOST:
+        desc: "Where Authelia finds redis; overrides session.redis.host (fjord sets this; 127.0.0.1 on host networking)"
+        level: advanced
+        optional: true
     volumes:
       /config: "Configuration directory"
     ports:
@@ -46,6 +58,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=${TZ:-UTC}
+      - AUTHELIA_SESSION_REDIS_HOST=${AUTHELIA_SESSION_REDIS_HOST:-127.0.0.1}
     volumes:
       - ${CONFIG_LOCATION}:/config
     ports:
