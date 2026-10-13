@@ -49,7 +49,7 @@ Before deploying, ensure your host environment is ready. See the [Quick Start Gu
 # (first start writes a config for it)
 PUBLIC_URL=
 
-# Authelia configuration directory (configuration.yml, users_database.yml)
+# Authelia configuration directory (authelia.yml, users_database.yml)
 CONFIG_LOCATION=/containers/authelia/config
 
 # Redis session store data

@@ -1,11 +1,11 @@
 {
-  "generated": "2026-10-11T22:54:02Z",
+  "generated": "2026-10-13T22:21:56Z",
   "image": "authelia-server",
   "tags": {
     "latest": {
       "app_version": "4.39.28",
       "arch": "amd64",
-      "generated": "2026-10-11T22:45:23Z",
+      "generated": "2026-10-13T22:21:18Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -763,7 +763,7 @@
     "pkg": {
       "app_version": "4.39.20_7",
       "arch": "amd64",
-      "generated": "2026-10-11T22:48:29Z",
+      "generated": "2026-10-13T22:20:33Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -1568,7 +1568,7 @@
     "pkg-latest": {
       "app_version": "4.39.20_7",
       "arch": "amd64",
-      "generated": "2026-10-11T22:49:22Z",
+      "generated": "2026-10-13T22:20:32Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
