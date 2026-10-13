@@ -1,18 +1,92 @@
 #!/bin/sh
-# Initialize Authelia directories
+# Authelia first start: write a config that runs, once. An existing
+# /config/authelia.yml is never touched.
+#
+# Everything is generated except the address people open Authelia at
+# (PUBLIC_URL, https): Authelia refuses http, and the session cookie's
+# domain has to contain it. Login: admin, password logged once below and
+# kept in /config/admin-password.txt until you delete it.
 
-# Ensure directories exist and have correct ownership
 mkdir -p /config /data/certificates /data/assets
 chown -R bsd:bsd /config /data
 
-# Generate default config if missing
-if [ ! -f /config/authelia.yml ]; then
-    if [ ! -f /app/config.template.yml ]; then
-        cp /usr/local/etv/authelia.yml.sample /config/authelia.yml
-    else
-        cp /app/config.template.yml /config/authelia.yml
-    fi
-    chown bsd:bsd /config/authelia.yml
+cfg=/config/authelia.yml
+[ -f "$cfg" ] && exit 0
 
-    echo "Created default authelia.yml"
-fi
+case "$PUBLIC_URL" in
+    https://*) ;;
+    *)
+        echo "[authelia] No /config/authelia.yml, and PUBLIC_URL is not an https address"
+        echo "[authelia] (got '${PUBLIC_URL}'). Set it, e.g. https://auth.example.com, and restart."
+        exit 0
+        ;;
+esac
+
+# auth.example.com -> example.com; a bare example.com stays as it is.
+host=${PUBLIC_URL#https://}
+host=${host%%/*}
+host=${host%%:*}
+domain=$host
+case "$host" in
+    *.*.*) domain=${host#*.} ;;
+esac
+
+# /app on :latest, the package's path on :pkg.
+authelia=/app/authelia
+[ -x "$authelia" ] || authelia=/usr/local/bin/authelia
+
+rand() {
+    "$authelia" crypto rand --length "$1" --charset alphanumeric | sed 's/^Random Value: //'
+}
+
+password=$(rand 24)
+digest=$("$authelia" crypto hash generate argon2 --password "$password" --no-confirm | sed 's/^Digest: //')
+
+cat > /config/users_database.yml <<EOF
+users:
+  admin:
+    displayname: "Admin"
+    password: "${digest}"
+    email: "admin@${domain}"
+    groups:
+      - admins
+EOF
+
+cat > "$cfg" <<EOF
+# Written by the container on first start; yours to edit from here on.
+server:
+  address: 'tcp://:9091/'
+identity_validation:
+  reset_password:
+    jwt_secret: '$(rand 64)'
+authentication_backend:
+  file:
+    path: '/config/users_database.yml'
+access_control:
+  default_policy: 'one_factor'
+session:
+  secret: '$(rand 64)'
+  cookies:
+    - name: 'authelia_session'
+      domain: '${domain}'
+      authelia_url: '${PUBLIC_URL%/}'
+  redis:
+    # AUTHELIA_SESSION_REDIS_HOST overrides this (the compose sets it).
+    host: '127.0.0.1'
+    port: 6379
+storage:
+  encryption_key: '$(rand 64)'
+  local:
+    path: '/config/db.sqlite3'
+notifier:
+  filesystem:
+    filename: '/config/notification.txt'
+EOF
+
+echo "$password" > /config/admin-password.txt
+chmod 600 "$cfg" /config/users_database.yml /config/admin-password.txt
+chown bsd:bsd "$cfg" /config/users_database.yml /config/admin-password.txt
+
+echo "[authelia] Wrote $cfg for ${PUBLIC_URL%/} (cookie domain ${domain})"
+echo "[authelia] Log in as admin, password: ${password}"
+echo "[authelia] (also in /config/admin-password.txt; delete it once noted)"

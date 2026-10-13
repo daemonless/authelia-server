@@ -37,7 +37,8 @@ x-daemonless:
       PUID: "User ID for the application process"
       PGID: "Group ID for the application process"
       TZ: "Timezone for the container"
-      CONFIG_LOCATION: "Path to the Authelia configuration directory (configuration.yml, users database)"
+      PUBLIC_URL: "The https address you open Authelia at, e.g. https://auth.example.com. First start writes a working config for it; log in as admin, password in the log once and in /config/admin-password.txt"
+      CONFIG_LOCATION: "Path to the Authelia configuration directory (authelia.yml, users_database.yml)"
       REDIS_DATA_LOCATION: "Path to store the redis session store"
       AUTHELIA_SESSION_REDIS_HOST:
         desc: "Where Authelia finds redis; overrides session.redis.host (fjord sets this; 127.0.0.1 on host networking)"
@@ -58,6 +59,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=${TZ:-UTC}
+      - PUBLIC_URL=${PUBLIC_URL}
       - AUTHELIA_SESSION_REDIS_HOST=${AUTHELIA_SESSION_REDIS_HOST:-127.0.0.1}
     volumes:
       - ${CONFIG_LOCATION}:/config

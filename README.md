@@ -45,6 +45,10 @@ Before deploying, ensure your host environment is ready. See the [Quick Start Gu
 # Authelia for FreeBSD (Daemonless)
 # Copy to .env and edit.
 
+# The https address you open Authelia at, e.g. https://auth.example.com
+# (first start writes a config for it)
+PUBLIC_URL=
+
 # Authelia configuration directory (configuration.yml, users_database.yml)
 CONFIG_LOCATION=/containers/authelia/config
 
@@ -70,6 +74,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=${TZ:-UTC}
+      - PUBLIC_URL=${PUBLIC_URL}
       - AUTHELIA_SESSION_REDIS_HOST=${AUTHELIA_SESSION_REDIS_HOST:-127.0.0.1}
     volumes:
       - ${CONFIG_LOCATION}:/config
@@ -100,6 +105,7 @@ DIRECTOR_PROJECT=authelia-server
 PUID=1000
 PGID=1000
 TZ=UTC
+PUBLIC_URL=
 AUTHELIA_SESSION_REDIS_HOST=127.0.0.1
 CONFIG_LOCATION=/containers/authelia/config
 REDIS_DATA_LOCATION=/containers/authelia/redis
@@ -118,13 +124,13 @@ services:
     name: authelia_server
     options:
       - container: 'args:--pull'
-      - expose: '9091:9091 proto:tcp'
     oci:
       user: root
       environment:
         - PUID: !ENV '${PUID}'
         - PGID: !ENV '${PGID}'
         - TZ: !ENV '${TZ}'
+        - PUBLIC_URL: !ENV '${PUBLIC_URL}'
         - AUTHELIA_SESSION_REDIS_HOST: !ENV '${AUTHELIA_SESSION_REDIS_HOST}'
         - CONFIG_LOCATION: !ENV '${CONFIG_LOCATION}'
         - REDIS_DATA_LOCATION: !ENV '${REDIS_DATA_LOCATION}'
@@ -175,8 +181,9 @@ Access at: `http://localhost:9091`
 | `PUID` | `1000` | User ID for the application process |
 | `PGID` | `1000` | Group ID for the application process |
 | `TZ` | `UTC` | Timezone for the container |
+| `PUBLIC_URL` | `` | The https address you open Authelia at, e.g. https://auth.example.com. First start writes a working config for it; log in as admin, password in the log once and in /config/admin-password.txt |
 | `AUTHELIA_SESSION_REDIS_HOST` | `127.0.0.1` | Where Authelia finds redis; overrides session.redis.host (fjord sets this; 127.0.0.1 on host networking) |
-| `CONFIG_LOCATION` | `/containers/authelia/config` | Path to the Authelia configuration directory (configuration.yml, users database) |
+| `CONFIG_LOCATION` | `/containers/authelia/config` | Path to the Authelia configuration directory (authelia.yml, users_database.yml) |
 | `REDIS_DATA_LOCATION` | `/containers/authelia/redis` | Path to store the redis session store |
 
 ### Volumes
