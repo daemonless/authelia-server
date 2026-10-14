@@ -50,10 +50,10 @@ Before deploying, ensure your host environment is ready. See the [Quick Start Gu
 PUBLIC_URL=
 
 # Authelia configuration directory (authelia.yml, users_database.yml)
-CONFIG_LOCATION=/containers/authelia/config
+CONFIG_LOCATION=/containers/authelia-server/config
 
 # Redis session store data
-REDIS_DATA_LOCATION=/containers/authelia/redis
+REDIS_DATA_LOCATION=/containers/authelia-server/redis
 
 # Timezone (TZ identifier)
 # TZ=UTC
@@ -107,8 +107,8 @@ PGID=1000
 TZ=UTC
 PUBLIC_URL=
 AUTHELIA_SESSION_REDIS_HOST=127.0.0.1
-CONFIG_LOCATION=/containers/authelia/config
-REDIS_DATA_LOCATION=/containers/authelia/redis
+CONFIG_LOCATION=/containers/authelia-server/config
+REDIS_DATA_LOCATION=/containers/authelia-server/redis
 ```
 
 **appjail-director.yml**:
@@ -183,8 +183,8 @@ Access at: `http://localhost:9091`
 | `TZ` | `UTC` | Timezone for the container |
 | `PUBLIC_URL` | `` | The https address you open Authelia at, e.g. https://auth.example.com. First start writes a working config for it; log in as admin, password in the log once and in /config/admin-password.txt |
 | `AUTHELIA_SESSION_REDIS_HOST` | `127.0.0.1` | Where Authelia finds redis; overrides session.redis.host (fjord sets this; 127.0.0.1 on host networking) |
-| `CONFIG_LOCATION` | `/containers/authelia/config` | Path to the Authelia configuration directory (authelia.yml, users_database.yml) |
-| `REDIS_DATA_LOCATION` | `/containers/authelia/redis` | Path to store the redis session store |
+| `CONFIG_LOCATION` | `/containers/authelia-server/config` | Path to the Authelia configuration directory (authelia.yml, users_database.yml) |
+| `REDIS_DATA_LOCATION` | `/containers/authelia-server/redis` | Path to store the redis session store |
 
 ### Volumes
 
