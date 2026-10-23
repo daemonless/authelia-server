@@ -1,5 +1,5 @@
 ARG BASE_VERSION=15
-FROM ghcr.io/daemonless/base:${BASE_VERSION}
+FROM ghcr.io/daemonless/base-exec:${BASE_VERSION}
 
 ARG FREEBSD_ARCH=amd64
 ARG PACKAGES="authelia"
@@ -32,11 +32,11 @@ RUN pkg update && \
 
 # Copy root filesystem and set permissions
 COPY root/ /
-RUN if [ -f /etc/services.d/authelia/run.pkg ]; then \
-      mv /etc/services.d/authelia/run.pkg /etc/services.d/authelia/run; \
-    fi && \
-    chmod +x /etc/services.d/*/run /etc/cont-init.d/* /healthz 2>/dev/null || true
+# The pkg layout's launcher (/usr/local/bin/authelia, not /app)
+RUN mv /daemonless/libexec/authelia.pkg /daemonless/libexec/authelia && \
+    chmod +x /daemonless/libexec/authelia /daemonless/init.d/* /healthz
 
+CMD ["/daemonless/libexec/authelia"]
 
 # --- Expose (Injected by Generator) ---
 {%- if ports %}

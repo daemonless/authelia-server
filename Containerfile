@@ -5,7 +5,7 @@
 # --------------------------------------------------------------------------
 
 ARG BASE_VERSION=15
-FROM ghcr.io/daemonless/base:${BASE_VERSION}
+FROM ghcr.io/daemonless/base-exec:${BASE_VERSION}
 
 ARG FREEBSD_ARCH=amd64
 ARG PACKAGES=""
@@ -50,7 +50,12 @@ RUN mkdir -p /config && chown -R bsd:bsd /config /app
 
 # Copy s6 service files
 COPY root/ /
-RUN chmod +x /etc/services.d/*/run /etc/cont-init.d/* /healthz 2>/dev/null || true
+RUN rm /daemonless/libexec/authelia.pkg && \
+    chmod +x /daemonless/libexec/authelia /daemonless/init.d/*
+
+CMD ["/daemonless/libexec/authelia"]
+
+RUN chmod +x /healthz
 
 # --- Expose (Injected by Generator) ---
 EXPOSE 9091

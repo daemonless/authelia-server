@@ -1,0 +1,7 @@
+#!/bin/sh
+# Start authelia; /init has already dropped to the run user.
+
+echo "[INFO] Starting authelia..."
+
+# Standard start command for authelia
+exec /usr/local/bin/authelia --config /config/authelia.yml
